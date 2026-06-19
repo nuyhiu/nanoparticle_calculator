@@ -272,5 +272,5 @@ st.caption(
     f"마우스로 드래그하면 회전, 스크롤로 확대 / 축소됩니다.",
     unsafe_allow_html=True
 )
-fig_surf = plot_surface_3d(d_range, q_range, max_pt)
+fig_surf = plot_surface_3d(d_range, q_range, max_pt, current_pt)
 st.plotly_chart(fig_surf, use_container_width=True)
