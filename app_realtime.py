@@ -3,14 +3,28 @@ import numpy as np
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 import matplotlib.font_manager as fm
+import os
+import urllib.request
 
-font_list = [f.name for f in fm.fontManager.ttflist
-             if any(k in f.name for k in ['Gothic', 'Malgun', 'Nanum', 'Noto'])]
+font_dir = os.path.join(os.path.dirname(__file__), '.fonts')
+os.makedirs(font_dir, exist_ok=True)
+font_path = os.path.join(font_dir, "NanumGothic.ttf")
 
-if font_list:
-    plt.rcParams['font.family'] = font_list[0]
+if not os.path.exists(font_path):
+  try:
+    urllib.request.urlretrieve(
+      "https://github.com/google/fonts/raw/main/ofl/nanumgothic/NanumGothic.ttf", font_path
+    )
+  except:
+    pass
+
+if os.path.exists(font_path):
+  fm.fontManager.addfont(font_path)
+  prop = fm.FontProperties(fname=font_path)
+  plt.rcParams['font.family'] = prop.get_name()
 else:
-    plt.rcParams['font.family'] = 'DejaVu Sans'
+  plt.rcParams['font.family'] = 'DejaVu Sans'
+
 plt.rcParams['axes.unicode_minus'] = False
 
 
