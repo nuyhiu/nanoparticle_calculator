@@ -2,31 +2,7 @@ import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
-import matplotlib.font_manager as fm
-import os
-import urllib.request
-
-font_dir = os.path.join(os.path.dirname(__file__), '.fonts')
-os.makedirs(font_dir, exist_ok=True)
-font_path = os.path.join(font_dir, "NanumGothic.ttf")
-
-if not os.path.exists(font_path):
-  try:
-    urllib.request.urlretrieve(
-      "https://github.com/google/fonts/raw/main/ofl/nanumgothic/NanumGothic.ttf", font_path
-    )
-  except:
-    pass
-
-if os.path.exists(font_path):
-  fm.fontManager.addfont(font_path)
-  prop = fm.FontProperties(fname=font_path)
-  plt.rcParams['font.family'] = prop.get_name()
-else:
-  plt.rcParams['font.family'] = 'DejaVu Sans'
-
-plt.rcParams['axes.unicode_minus'] = False
-
+import plotly.subplots import make_subplots
 
 # ────────────────────── 모델 상수 (고정값) ──────────────────────
 CONST = {
@@ -169,20 +145,42 @@ def plot_time_curve(alpha, kp, t_max, current_t):
     """시간에 따른 내부화율 곡선"""
     t_vals = np.linspace(0, t_max, 200)
     uptake = alpha * (1 - np.exp(-kp * t_vals)) * 100
-    fig, ax = plt.subplots(figsize=(7, 3.5))
-    ax.plot(t_vals, uptake, color='#22c55e', linewidth=2.5)
-    ax.set_xlim(0, t_max)
-    ax.set_ylim(0, 105)
-    ax.set_xlabel("시간 t (min)")
-    ax.set_ylabel("내부화율 (%)")
-    ax.grid(True, linestyle='--', alpha=0.3)
+  
+    fig = go.Figure()
+
+    fig.add_trace(go,Scatter(
+      x=t_vals,
+      y=uptake,
+      mode='lines',
+      name='내부화율',
+      line=dict(color='#22c55e', width=3)
+    ))
+
     cur_val = alpha * (1 - np.exp(-kp * current_t)) * 100
-    ax.scatter(current_t, cur_val, color='#facc15', s=80, zorder=5,
-               edgecolors='white', linewidth=1.5)
-    ax.axvline(x=current_t, color='#facc15', linestyle='--', alpha=0.5)
-    ax.axhline(y=cur_val, color='#facc15', linestyle='--', alpha=0.3)
-    ax.set_title("시간별 누적 내부화율", fontweight='bold')
-    fig.tight_layout()
+    fig.add_trace(go.Scatter(
+      x=[current_t],
+      y=[cur_val],
+      mode='markers',
+      name=f't = {current_t} min,
+      marker=dict(color='#facc15', size=12, line=dict(color='white', width=2))
+    ))
+
+    fig.add_vline(x=current_t, line_dash="dash", "line_color=#facc15", opacity=0.5)
+    fig.add_vline(y=cur_val, line_dash="dash", "line_color=#facc15", opacity=0.3)
+
+    fig.update_layout(
+      xaxis_title="시간 t (min)",
+      yaxis_title="내부화율 (%)",
+      title="시간에 따른 누적 내부화율",
+      font=dict(family="Malgun Gothic, sans-serif", size=12),
+      hovermode='x',
+      template='plotly_dark',
+      height=400,
+      margin=dict(l=40, r=20, t=50, b=40),
+      xaxis=dict(range=[0, t_max], gridcolor='#334155'),
+      yaxis=dict(range=[0, 105], gridcolor='#334155')
+    )
+    
     return fig
 
 
@@ -267,8 +265,7 @@ current_pt = {"d": d, "q": q, "alpha": res["alpha"]}
 
 st.subheader("① 시간 함수")
 fig_time = plot_time_curve(res["alpha"], kp, 100, t)
-st.pyplot(fig_time)
-plt.close(fig_time)
+st.plotly_chart(fig_time, use_container_width=True)
 
 st.subheader("② 3D 확률 공간 좌표계")
 st.caption(
