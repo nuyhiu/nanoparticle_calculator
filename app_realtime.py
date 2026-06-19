@@ -148,7 +148,7 @@ def plot_time_curve(alpha, kp, t_max, current_t):
   
     fig = go.Figure()
 
-    fig.add_trace(go,Scatter(
+    fig.add_trace(go.Scatter(
       x=t_vals,
       y=uptake,
       mode='lines',
