@@ -161,7 +161,7 @@ def plot_time_curve(alpha, kp, t_max, current_t):
       x=[current_t],
       y=[cur_val],
       mode='markers',
-      name=f't = {current_t} min,
+      name=f't = {current_t} min',
       marker=dict(color='#facc15', size=12, line=dict(color='white', width=2))
     ))
 
