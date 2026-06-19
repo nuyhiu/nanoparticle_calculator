@@ -2,7 +2,7 @@ import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
-import plotly.subplots import make_subplots
+from plotly.subplots import make_subplots
 
 # ────────────────────── 모델 상수 (고정값) ──────────────────────
 CONST = {
