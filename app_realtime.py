@@ -238,7 +238,7 @@ st.markdown(f"""
 <div style="background:linear-gradient(135deg,#1e293b,#0f172a); border-radius:12px; padding:15px 20px; margin:10px 0 20px; border-left:5px solid #818cf8;">
     <div style="display:flex; justify-content:space-around; flex-wrap:wrap; text-align:center;">
         <div><span style="color:#94a3b8;">최대 내부화 확률 (α)</span><br><b style="color:#818cf8; font-size:28px;">{res['alpha']:.6f}</b></div>
-        <div><span style="color:#94a3b8;">속도 상수 (kₚ)</span><br><b style="color:#a5b4fc; font-size:20px;">{kp:.6f} /min</b></div>
+        <div><span style="color:#94a3b8;">속도 상수 (kₚ)</span><br><b style="color:#a5b4fc; font-size:28px;">{kp:.6f} /min</b></div>
         <div><span style="color:#94a3b8;">현재 내부화율 (t = {t}min)</span><br><b style="color:#facc15; font-size:28px;">{cur_uptake:.3f} %</b></div>
     </div>
 </div>
