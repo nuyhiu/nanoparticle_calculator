@@ -165,8 +165,8 @@ def plot_time_curve(alpha, kp, t_max, current_t):
       marker=dict(color='#facc15', size=12, line=dict(color='white', width=2))
     ))
 
-    fig.add_vline(x=current_t, line_dash="dash", "line_color=#facc15", opacity=0.5)
-    fig.add_vline(y=cur_val, line_dash="dash", "line_color=#facc15", opacity=0.3)
+    fig.add_vline(x=current_t, line_dash="dash", line_color="#facc15", opacity=0.5)
+    fig.add_vline(y=cur_val, line_dash="dash", line_color="#facc15", opacity=0.3)
 
     fig.update_layout(
       xaxis_title="시간 t (min)",
