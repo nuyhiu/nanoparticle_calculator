@@ -2,9 +2,15 @@ import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
-import koreanize_matplotlib
+import matplotlib.font_manager as fm
 
-plt.rcParams['font.family'] = 'Malgun Gothic'
+font_list = [f.name for f in fm.fontManager.ttflist
+             if any(k in f.name for k in ['Gothic', 'Malgun', 'Nanum', 'Noto'])]
+
+if font_list:
+    plt.rcParams['font.family'] = font_list[0]
+else:
+    plt.rcParams['font.family'] = 'DejaVu Sans'
 plt.rcParams['axes.unicode_minus'] = False
 
 
