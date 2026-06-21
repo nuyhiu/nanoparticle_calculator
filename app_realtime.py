@@ -191,7 +191,7 @@ def plot_time_curve(alpha, kp, t_max, current_t):
       height=400,
       margin=dict(l=40, r=20, t=50, b=40),
       xaxis=dict(range=[0, t_max], gridcolor='#334155'),
-      yaxis=dict(range=[0, y_upper], gridcolor='#334155')
+      yaxis=dict(range=[0, y_upper], gridcolor='#334155'),
       dragmode='pan'
 
     )
