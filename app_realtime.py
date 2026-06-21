@@ -226,7 +226,7 @@ with col1:
 with col2:
     q = st.number_input("표면 전하 (q)", min_value=-20.0, max_value=20.0, value=0.0, step=0.1)
 with col3:
-    t = st.slider("경과 시간 (t)", min_value=0, max_value=100, value=30, step=1)
+    t = st.slider("경과 시간 (t)", min_value=0, max_value=210, value=30, step=1)
 
 # ─── 2. 즉시 계산 ───
 res = calc_alpha(d, q)
@@ -264,7 +264,7 @@ max_pt = find_global_max(d_range, q_range, 150)
 current_pt = {"d": d, "q": q, "alpha": res["alpha"]}
 
 st.subheader("① 시간 함수")
-fig_time = plot_time_curve(res["alpha"], kp, 100, t)
+fig_time = plot_time_curve(res["alpha"], kp, 210, t)
 st.plotly_chart(fig_time, use_container_width=True)
 
 st.subheader("② 3D 확률 공간 좌표계")
