@@ -202,10 +202,19 @@ def plot_time_curve(alpha, kp, t_max, current_t):
 # ────────────────────── Streamlit 앱 (통합) ──────────────────────
 st.set_page_config(page_title="나노입자 내부화 계산기", layout="wide")
 
+st.markdown("""
+    <style>
+    [data-testid="stSidebar"] {
+        min-width: 320px;
+        max-width: 320px;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
 # 사이드바
 with st.sidebar:
     st.markdown("### 모델 상수 (고정값)")
-    st.markdown("""
+    st.code("""
 CME 최적 직경 = 100 nm
 CvME 최적 직경 = 50 nm
 CME 크기 미스매치 계수 = 0.000620
