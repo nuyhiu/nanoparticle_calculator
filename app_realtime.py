@@ -145,6 +145,8 @@ def plot_time_curve(alpha, kp, t_max, current_t):
     t_vals = np.linspace(0, t_max, 200)
     uptake = alpha * (1 - np.exp(-kp * t_vals)) * 100
 
+    cur_val = alpha * (1 - np.exp(-kp * current_t)) * 100
+
     y_max_data = np.max(uptake) if np.max(uptake) > 0 else 1.0
     y_upper = max(y_max_data * 1.15, cur_val * 1.2)
     if y_upper < 0.01:
