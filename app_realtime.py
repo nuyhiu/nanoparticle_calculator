@@ -144,6 +144,11 @@ def plot_time_curve(alpha, kp, t_max, current_t):
     """시간에 따른 내부화율 곡선"""
     t_vals = np.linspace(0, t_max, 200)
     uptake = alpha * (1 - np.exp(-kp * t_vals)) * 100
+
+    y_max_data = np.max(uptake) if np.max(uptake) > 0 else 1.0
+    y_upper = max(y_max_data * 1.15, cur_val * 1.2)
+    if y_upper < 0.01:
+        y_upper = 0.01
   
     fig = go.Figure()
 
@@ -177,7 +182,8 @@ def plot_time_curve(alpha, kp, t_max, current_t):
       height=400,
       margin=dict(l=40, r=20, t=50, b=40),
       xaxis=dict(range=[0, t_max], gridcolor='#334155'),
-      yaxis=dict(range=[0, 105], gridcolor='#334155')
+      yaxis=dict(range=[0, y_upper], gridcolor='#334155')
+
     )
     
     return fig
@@ -192,7 +198,7 @@ with st.sidebar:
     st.code("""
 CME 최적 직경 = 100 nm
 CvME 최적 직경 = 50 nm
-CME 크기 미스매치 계수 = 0.00620
+CME 크기 미스매치 계수 = 0.000620
 CvME 크기 미스매치 계수 = 0.005536
 전하 영향력 계수 = 0.073566
 pH 전하 민감도 계수 = 0.5
@@ -221,9 +227,9 @@ st.markdown(
 
 col1, col2, col3 = st.columns(3)
 with col1:
-    d = st.number_input("직경 (d)", min_value=20.0, max_value=200.0, value=100.0, step=1.0)
+    d = st.number_input("직경 (d, nm)", min_value=20.0, max_value=200.0, value=100.0, step=1.0)
 with col2:
-    q = st.number_input("표면 전하 (q)", min_value=-20.0, max_value=20.0, value=0.0, step=0.1)
+    q = st.number_input("표면 전하 (q, mV)", min_value=-20.0, max_value=20.0, value=0.0, step=0.1)
 with col3:
     t = st.slider("경과 시간 (t)", min_value=0, max_value=210, value=30, step=1)
 
