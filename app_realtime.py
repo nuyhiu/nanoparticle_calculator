@@ -80,7 +80,7 @@ def build_alpha_grid(d_range, q_range, steps=150):
 
 
 def plot_surface_3d(d_range, q_range, max_pt, current_pt=None, steps=150):
-    """진짜 3D 공간 좌표(d, q, α)를 사용하는 plotly 인터랙티브 곡면"""
+    """3D 공간 좌표(d, q, α)를 사용하는 plotly 인터랙티브 곡면"""
     d_vals, q_vals, alpha_grid = build_alpha_grid(d_range, q_range, steps)
 
     fig = go.Figure()
