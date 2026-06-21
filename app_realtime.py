@@ -205,8 +205,8 @@ st.set_page_config(page_title="나노입자 내부화 계산기", layout="wide")
 st.markdown("""
     <style>
     [data-testid="stSidebar"] {
-        min-width: 320px;
-        max-width: 320px;
+        min-width: 330px;
+        max-width: 350px;
     }
     </style>
     """, unsafe_allow_html=True)
