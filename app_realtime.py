@@ -83,6 +83,13 @@ def plot_surface_3d(d_range, q_range, max_pt, current_pt=None, steps=150):
     """3D 공간 좌표(d, q, α)를 사용하는 plotly 인터랙티브 곡면"""
     d_vals, q_vals, alpha_grid = build_alpha_grid(d_range, q_range, steps)
 
+    z_max_grid = np.max(alpha_grid)
+    if z_max_grid <= 0:
+        z_max_grid = 1.0
+    z_upper = z_max_grid * 1.3
+    if z_upper < 0.001:
+        z_upper = 0.001
+
     fig = go.Figure()
 
     # 메인 3D 곡면: x=d, y=q, z=alpha
@@ -130,7 +137,7 @@ def plot_surface_3d(d_range, q_range, max_pt, current_pt=None, steps=150):
             xaxis_title="직경 d (nm)",
             yaxis_title="전하 q (mV)",
             zaxis_title="내부화 확률",
-            zaxis=dict(range=[0, 1]),
+            zaxis=dict(range=[0, z_upper]),
             camera=dict(eye=dict(x=1.6, y=1.6, z=1.0)),
         ),
         margin=dict(l=0, r=0, t=40, b=0),
