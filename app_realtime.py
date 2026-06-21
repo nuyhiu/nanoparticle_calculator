@@ -128,7 +128,7 @@ def plot_surface_3d(d_range, q_range, max_pt, current_pt=None, steps=150):
         title=dict(text="내부화 확률", font=dict(size=16)),
         scene=dict(
             xaxis_title="직경 d (nm)",
-            yaxis_title="전하 q ",
+            yaxis_title="전하 q (mV)",
             zaxis_title="내부화 확률",
             zaxis=dict(range=[0, 1]),
             camera=dict(eye=dict(x=1.6, y=1.6, z=1.0)),
